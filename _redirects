@@ -1,0 +1,11 @@
+# Netlify Redirects
+# This file handles URL redirects and rewrites
+
+# Redirect old URLs to new ones (add as needed)
+# /old-page /new-page 301
+
+# Redirect admin to CMS
+/admin /admin/index.html 200
+
+# Handle SPA-style routing for future enhancements
+# /* /index.html 200

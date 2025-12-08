@@ -1,0 +1,147 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+# Uncomment below to enable drafts
+# publish_mode: editorial_workflow
+
+media_folder: "images/uploads" # Media files will be stored in the repo under images/uploads
+public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home Page"
+        name: "home"
+        file: "content/home.json"
+        fields:
+          - {label: "Hero Title", name: "hero_title", widget: "string"}
+          - {label: "Hero Subtitle", name: "hero_subtitle", widget: "string"}
+          - {label: "Service Times Line 1", name: "service_times_1", widget: "string"}
+          - {label: "Service Times Line 2", name: "service_times_2", widget: "string"}
+          - label: "Pastor Greeting"
+            name: "pastor_greeting"
+            widget: "object"
+            fields:
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Message", name: "message", widget: "markdown"}
+              - {label: "Photo", name: "photo", widget: "image", required: false}
+
+      - label: "About Page"
+        name: "about"
+        file: "content/about.json"
+        fields:
+          - {label: "Mission Statement", name: "mission_statement", widget: "markdown"}
+          - {label: "Vision Statement", name: "vision_statement", widget: "markdown"}
+          - {label: "History", name: "history", widget: "markdown"}
+
+  - name: "sermons"
+    label: "Sermons"
+    folder: "content/sermons"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Speaker", name: "speaker", widget: "string"}
+      - {label: "Series", name: "series", widget: "string", required: false}
+      - {label: "Scripture", name: "scripture", widget: "string", required: false}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Video URL (YouTube/Vimeo)", name: "video_url", widget: "string", required: false}
+      - {label: "Audio File", name: "audio", widget: "file", required: false}
+      - {label: "Sermon Notes PDF", name: "notes_pdf", widget: "file", required: false}
+      - {label: "Thumbnail", name: "thumbnail", widget: "image", required: false}
+
+  - name: "events"
+    label: "Events"
+    folder: "content/events"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Event Name", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "End Date/Time", name: "end_date", widget: "datetime", required: false}
+      - {label: "Location", name: "location", widget: "string"}
+      - {label: "Category", name: "category", widget: "select", options: ["worship", "fellowship", "outreach", "youth"]}
+      - {label: "Description", name: "description", widget: "markdown"}
+      - {label: "Registration Required", name: "registration_required", widget: "boolean", default: false}
+      - {label: "Registration Link", name: "registration_link", widget: "string", required: false}
+      - {label: "Contact Person", name: "contact", widget: "string", required: false}
+      - {label: "Image", name: "image", widget: "image", required: false}
+
+  - name: "ministries"
+    label: "Ministries"
+    folder: "content/ministries"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Ministry Name", name: "title", widget: "string"}
+      - {label: "Icon/Emoji", name: "icon", widget: "string", hint: "Enter an emoji or icon code"}
+      - {label: "Short Description", name: "short_description", widget: "text"}
+      - {label: "Full Description", name: "description", widget: "markdown"}
+      - {label: "Leader", name: "leader", widget: "string"}
+      - {label: "Contact Email", name: "contact_email", widget: "string", required: false}
+      - {label: "Meeting Time", name: "meeting_time", widget: "string", required: false}
+      - {label: "Meeting Location", name: "location", widget: "string", required: false}
+      - {label: "Age Group", name: "age_group", widget: "string", required: false}
+      - {label: "Image", name: "image", widget: "image", required: false}
+
+  - name: "staff"
+    label: "Staff Members"
+    folder: "content/staff"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Full Name", name: "name", widget: "string"}
+      - {label: "Title/Position", name: "title", widget: "string"}
+      - {label: "Bio", name: "bio", widget: "markdown"}
+      - {label: "Email", name: "email", widget: "string", required: false}
+      - {label: "Phone", name: "phone", widget: "string", required: false}
+      - {label: "Photo", name: "photo", widget: "image", required: false}
+      - {label: "Order", name: "order", widget: "number", default: 100, hint: "Lower numbers appear first"}
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "General Settings"
+        name: "general"
+        file: "content/settings/general.json"
+        fields:
+          - {label: "Church Name", name: "church_name", widget: "string"}
+          - {label: "Tagline", name: "tagline", widget: "string"}
+          - {label: "Address", name: "address", widget: "text"}
+          - {label: "Phone", name: "phone", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Facebook URL", name: "facebook_url", widget: "string", required: false}
+          - {label: "YouTube URL", name: "youtube_url", widget: "string", required: false}
+          - {label: "Instagram URL", name: "instagram_url", widget: "string", required: false}
+          - {label: "Logo", name: "logo", widget: "image", required: false}
+
+      - label: "Service Times"
+        name: "services"
+        file: "content/settings/services.json"
+        fields:
+          - label: "Sunday Morning"
+            name: "sunday_morning"
+            widget: "object"
+            fields:
+              - {label: "Sunday School Time", name: "sunday_school", widget: "string"}
+              - {label: "Worship Service Time", name: "worship", widget: "string"}
+          - {label: "Sunday Evening Time", name: "sunday_evening", widget: "string"}
+          - {label: "Wednesday Evening Time", name: "wednesday", widget: "string"}
+
+  - name: "announcements"
+    label: "Announcements"
+    folder: "content/announcements"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Message", name: "message", widget: "markdown"}
+      - {label: "Start Date", name: "start_date", widget: "datetime"}
+      - {label: "End Date", name: "end_date", widget: "datetime"}
+      - {label: "Priority", name: "priority", widget: "select", options: ["high", "medium", "low"], default: "medium"}
+      - {label: "Link", name: "link", widget: "string", required: false}
+      - {label: "Link Text", name: "link_text", widget: "string", required: false}

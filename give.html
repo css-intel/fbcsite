@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support Friendship Baptist Church through online giving">
+    <title>Give | Friendship Baptist Church</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header" id="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <div class="logo-placeholder">FBC</div>
+                        <span class="church-name">Friendship Baptist Church</span>
+                    </a>
+                </div>
+                <nav class="main-nav" id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        <li><a href="sermons.html">Sermons</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="give.html" class="cta-nav active">Give</a></li>
+                        <li><a href="visit.html">Visit</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Give Online</h1>
+            <p class="page-subtitle">Support the mission and ministry of Friendship Baptist Church</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="content-block centered">
+                <h2>Why We Give</h2>
+                <p class="lead">"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." - 2 Corinthians 9:7</p>
+                <p>Giving is an act of worship and obedience to God. Your generosity enables us to spread the Gospel, care for our community, support missions worldwide, and maintain a vibrant church family. Every gift, no matter the size, makes a difference in advancing God's kingdom.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Ways to Give</h2>
+            <div class="giving-options">
+                <div class="giving-option">
+                    <div class="giving-option-icon">💳</div>
+                    <h3>Online Giving</h3>
+                    <p>Give securely online using your credit/debit card or bank account. Set up one-time or recurring gifts.</p>
+                    <a href="#online-form" class="btn btn-primary">Give Now</a>
+                </div>
+                <div class="giving-option">
+                    <div class="giving-option-icon">📱</div>
+                    <h3>Text to Give</h3>
+                    <p>Text GIVE to (803) 555-1234 and follow the prompts to complete your gift quickly and easily.</p>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="giving-option">
+                    <div class="giving-option-icon">✉️</div>
+                    <h3>Mail a Check</h3>
+                    <p>Mail your check to:<br>Friendship Baptist Church<br>123 Church Street<br>Aiken, SC 29801</p>
+                    <a href="#" class="btn btn-outline">View Details</a>
+                </div>
+                <div class="giving-option">
+                    <div class="giving-option-icon">🏦</div>
+                    <h3>Bill Pay</h3>
+                    <p>Set up recurring gifts through your bank's online bill pay system directed to the church.</p>
+                    <a href="#" class="btn btn-outline">Instructions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="online-form">
+        <div class="container">
+            <div class="content-block">
+                <h2>Online Giving Form</h2>
+                <div class="contact-form">
+                    <form name="giving" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                        <input type="hidden" name="form-name" value="giving" />
+                        <p style="display: none;">
+                            <label>Don't fill this out: <input name="bot-field" /></label>
+                        </p>
+
+                        <div class="form-group">
+                            <label>Select Amount:</label>
+                            <div class="quick-amounts">
+                                <button type="button" class="quick-amount" data-amount="25">$25</button>
+                                <button type="button" class="quick-amount" data-amount="50">$50</button>
+                                <button type="button" class="quick-amount" data-amount="100">$100</button>
+                                <button type="button" class="quick-amount" data-amount="250">$250</button>
+                                <button type="button" class="quick-amount" data-amount="500">$500</button>
+                                <button type="button" class="quick-amount" data-amount="1000">$1000</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="customAmount">Or Enter Custom Amount ($):</label>
+                            <input type="number" id="customAmount" name="amount" min="1" step="0.01" required>
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="givingType">Giving Type:</label>
+                            <select id="givingType" name="giving-type" required>
+                                <option value="">Select...</option>
+                                <option value="tithe">Tithe</option>
+                                <option value="offering">General Offering</option>
+                                <option value="missions">Missions</option>
+                                <option value="building">Building Fund</option>
+                                <option value="benevolence">Benevolence</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="frequency">Frequency:</label>
+                            <select id="frequency" name="frequency">
+                                <option value="once">One-Time Gift</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="monthly">Monthly</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="fullName">Full Name:</label>
+                            <input type="text" id="fullName" name="full-name" required>
+                        </div>
+
+                        <div class="form-group required">
+                            <label for="email">Email Address:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number:</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comments">Special Instructions or Dedication:</label>
+                            <textarea id="comments" name="comments" rows="4"></textarea>
+                        </div>
+
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin: 1rem 0;">
+                            <strong>Note:</strong> This form collects your giving information. You will be redirected to our secure payment processor to complete your transaction. Your information is kept confidential and used only for church records and tax documentation.
+                        </p>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">How Your Gifts Are Used</h2>
+            <div class="beliefs-grid">
+                <div class="belief-card">
+                    <h3>Worship & Teaching</h3>
+                    <p>Supporting Sunday services, children's ministry, youth programs, and Bible studies that help people grow in faith.</p>
+                </div>
+                <div class="belief-card">
+                    <h3>Staff & Operations</h3>
+                    <p>Compensating pastoral staff, maintaining our facilities, and covering essential operational costs.</p>
+                </div>
+                <div class="belief-card">
+                    <h3>Local Outreach</h3>
+                    <p>Food pantry, clothing closet, community meals, and other ministries serving our neighbors in need.</p>
+                </div>
+                <div class="belief-card">
+                    <h3>Global Missions</h3>
+                    <p>Supporting missionaries, funding mission trips, and partnering with international ministries spreading the Gospel.</p>
+                </div>
+            </div>
+            <div class="text-center" style="margin-top: 2rem;">
+                <a href="#" class="btn btn-outline">View Annual Report</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="content-block">
+                <h2>Frequently Asked Questions</h2>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">Is online giving secure?</div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                Yes! We use industry-leading encryption and security measures to protect your information. Your payment details are processed through a secure, PCI-compliant payment gateway.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Will I receive a tax receipt?</div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                Yes! You will receive an email confirmation immediately after giving, and we will provide a comprehensive tax statement each January for all your contributions during the previous year.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">Can I give to a specific ministry or fund?</div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                Absolutely! When you give online, you can designate your gift for general offering, missions, building fund, benevolence, or other specific purposes. Use the "Special Instructions" field to provide additional detail.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">How do I set up recurring giving?</div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                Simply select "Weekly" or "Monthly" in the frequency dropdown when completing your online giving form. You can modify or cancel recurring gifts at any time by contacting our church office.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">What if I need help with online giving?</div>
+                        <div class="accordion-content">
+                            <div class="accordion-body">
+                                We're here to help! Contact our church office at (803) 555-1234 or email info@friendshipbaptist.org, and our staff will gladly assist you with setting up online giving or answering any questions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="container">
+            <h2>Thank You for Your Generosity</h2>
+            <p>Your faithful giving makes our ministry possible</p>
+            <div class="cta-buttons">
+                <a href="contact.html" class="btn btn-primary">Contact Us</a>
+                <a href="about.html" class="btn btn-secondary">Learn About Our Mission</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p><strong>Friendship Baptist Church</strong><br>123 Church Street<br>Aiken, SC 29801</p>
+                    <p><strong>Phone:</strong> (803) 555-1234<br><strong>Email:</strong> info@friendshipbaptist.org</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Service Times</h4>
+                    <p><strong>Sunday Morning:</strong><br>Sunday School: 9:00 AM<br>Worship Service: 10:30 AM</p>
+                    <p><strong>Sunday Evening:</strong> 6:00 PM<br><strong>Wednesday:</strong> 7:00 PM</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="ministries.html">Ministries</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="give.html">Give Online</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect With Us</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook" class="social-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" aria-label="YouTube" class="social-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        </a>
+                        <a href="#" aria-label="Instagram" class="social-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Friendship Baptist Church. All rights reserved.</p>
+                <p>
+                    <a href="admin/index.html" style="color: inherit; text-decoration: none;">Admin</a> |
+                    <a href="../fbc-property-management/index.html" style="color: inherit; text-decoration: none;">Property Management</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
