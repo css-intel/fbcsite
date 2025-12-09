@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Management - Friendship Baptist Church</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="../index.html">
+                    <span class="nav-logo">FBC</span>
+                    <span class="nav-text">Property Management</span>
+                </a>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html" class="nav-link">Back to Church</a></li>
+                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+                <li><a href="#properties" class="nav-link">Properties</a></li>
+                <li><a href="#maintenance" class="nav-link">Maintenance</a></li>
+                <li><a href="#documents" class="nav-link">Documents</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Property Management System</h1>
+            <p>Efficiently manage church properties and facilities</p>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard section">
+        <div class="container">
+            <h2>Dashboard Overview</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">🏛️</div>
+                    <div class="stat-content">
+                        <h3>3</h3>
+                        <p>Properties</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔧</div>
+                    <div class="stat-content">
+                        <h3>5</h3>
+                        <p>Maintenance Items</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📄</div>
+                    <div class="stat-content">
+                        <h3>12</h3>
+                        <p>Documents</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-content">
+                        <h3>8</h3>
+                        <p>Staff Members</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section id="properties" class="properties section">
+        <div class="container">
+            <h2>Church Properties</h2>
+            <div class="properties-grid">
+                <!-- Property 1 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1577720621294-f3406b0865e7?w=400&h=300&fit=crop" alt="Main Church Building">
+                    </div>
+                    <div class="property-details">
+                        <h3>Main Church Building</h3>
+                        <p class="property-address">123 Church Street, Aiken, SC 29801</p>
+                        <ul class="property-info">
+                            <li><strong>Year Built:</strong> 1952</li>
+                            <li><strong>Square Feet:</strong> 8,500</li>
+                            <li><strong>Capacity:</strong> 350 people</li>
+                            <li><strong>Status:</strong> <span class="status-good">Good Condition</span></li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="toggleDetails(this)">View Details</button>
+                    </div>
+                    <div class="property-expanded" style="display: none;">
+                        <h4>Property Details</h4>
+                        <p>The main church building houses the sanctuary, fellowship hall, and administrative offices. Regular maintenance is performed quarterly.</p>
+                        <h4>Recent Improvements</h4>
+                        <ul>
+                            <li>HVAC system upgrade (2022)</li>
+                            <li>Roof repairs (2021)</li>
+                            <li>Interior painting (2023)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Property 2 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=400&h=300&fit=crop" alt="Educational Building">
+                    </div>
+                    <div class="property-details">
+                        <h3>Educational Building</h3>
+                        <p class="property-address">125 Church Street, Aiken, SC 29801</p>
+                        <ul class="property-info">
+                            <li><strong>Year Built:</strong> 1998</li>
+                            <li><strong>Square Feet:</strong> 5,200</li>
+                            <li><strong>Classrooms:</strong> 8</li>
+                            <li><strong>Status:</strong> <span class="status-good">Excellent Condition</span></li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="toggleDetails(this)">View Details</button>
+                    </div>
+                    <div class="property-expanded" style="display: none;">
+                        <h4>Property Details</h4>
+                        <p>Modern educational facility used for Sunday school classes, Bible studies, and community events.</p>
+                        <h4>Recent Improvements</h4>
+                        <ul>
+                            <li>Classroom technology upgrades (2023)</li>
+                            <li>WiFi system installation (2022)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Property 3 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop" alt="Parking Area">
+                    </div>
+                    <div class="property-details">
+                        <h3>Parking & Grounds</h3>
+                        <p class="property-address">123 Church Street, Aiken, SC 29801</p>
+                        <ul class="property-info">
+                            <li><strong>Parking Spaces:</strong> 125</li>
+                            <li><strong>Lot Size:</strong> 2.5 acres</li>
+                            <li><strong>Landscaping:</strong> Professional</li>
+                            <li><strong>Status:</strong> <span class="status-good">Well Maintained</span></li>
+                        </ul>
+                        <button class="btn btn-secondary" onclick="toggleDetails(this)">View Details</button>
+                    </div>
+                    <div class="property-expanded" style="display: none;">
+                        <h4>Property Details</h4>
+                        <p>Large parking lot with landscaped grounds. Regular maintenance includes asphalt sealing, line striping, and lawn care.</p>
+                        <h4>Recent Improvements</h4>
+                        <ul>
+                            <li>Parking lot seal coating (2023)</li>
+                            <li>LED lighting installation (2022)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Maintenance Section -->
+    <section id="maintenance" class="maintenance section">
+        <div class="container">
+            <h2>Maintenance & Repairs</h2>
+            <div class="maintenance-tabs">
+                <button class="tab-btn active" data-tab="active-tab">Active</button>
+                <button class="tab-btn" data-tab="completed-tab">Completed</button>
+                <button class="tab-btn" data-tab="scheduled-tab">Scheduled</button>
+            </div>
+
+            <!-- Active Maintenance -->
+            <div id="active-tab" class="tab-content active">
+                <div class="maintenance-list">
+                    <div class="maintenance-item status-in-progress">
+                        <div class="maintenance-header">
+                            <h4>Sanctuary HVAC Inspection</h4>
+                            <span class="badge badge-in-progress">In Progress</span>
+                        </div>
+                        <p class="maintenance-description">Annual HVAC system inspection and filter replacement</p>
+                        <div class="maintenance-meta">
+                            <span>🏛️ Main Church Building</span>
+                            <span>Started: Dec 5, 2024</span>
+                        </div>
+                    </div>
+
+                    <div class="maintenance-item status-in-progress">
+                        <div class="maintenance-header">
+                            <h4>Roof Leak Repairs</h4>
+                            <span class="badge badge-in-progress">In Progress</span>
+                        </div>
+                        <p class="maintenance-description">Address water leaks in fellowship hall roof</p>
+                        <div class="maintenance-meta">
+                            <span>🏛️ Main Church Building</span>
+                            <span>Started: Dec 3, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Completed Maintenance -->
+            <div id="completed-tab" class="tab-content">
+                <div class="maintenance-list">
+                    <div class="maintenance-item status-completed">
+                        <div class="maintenance-header">
+                            <h4>Parking Lot Line Striping</h4>
+                            <span class="badge badge-completed">Completed</span>
+                        </div>
+                        <p class="maintenance-description">Refreshed all parking lot lines and spaces</p>
+                        <div class="maintenance-meta">
+                            <span>🅿️ Parking & Grounds</span>
+                            <span>Completed: Nov 30, 2024</span>
+                        </div>
+                    </div>
+
+                    <div class="maintenance-item status-completed">
+                        <div class="maintenance-header">
+                            <h4>Classroom Paint Touch-ups</h4>
+                            <span class="badge badge-completed">Completed</span>
+                        </div>
+                        <p class="maintenance-description">Interior painting in classrooms 3 and 4</p>
+                        <div class="maintenance-meta">
+                            <span>📚 Educational Building</span>
+                            <span>Completed: Nov 25, 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scheduled Maintenance -->
+            <div id="scheduled-tab" class="tab-content">
+                <div class="maintenance-list">
+                    <div class="maintenance-item status-scheduled">
+                        <div class="maintenance-header">
+                            <h4>Annual Carpet Cleaning</h4>
+                            <span class="badge badge-scheduled">Scheduled</span>
+                        </div>
+                        <p class="maintenance-description">Professional carpet cleaning for sanctuary and fellowship areas</p>
+                        <div class="maintenance-meta">
+                            <span>🏛️ Main Church Building</span>
+                            <span>Scheduled: January 15, 2025</span>
+                        </div>
+                    </div>
+
+                    <div class="maintenance-item status-scheduled">
+                        <div class="maintenance-header">
+                            <h4>Fire Safety Inspection</h4>
+                            <span class="badge badge-scheduled">Scheduled</span>
+                        </div>
+                        <p class="maintenance-description">Annual fire safety and alarm system inspection</p>
+                        <div class="maintenance-meta">
+                            <span>🏛️ Main Church Building</span>
+                            <span>Scheduled: January 20, 2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section -->
+    <section id="documents" class="documents section">
+        <div class="container">
+            <h2>Property Documents</h2>
+            <div class="documents-grid">
+                <div class="document-category">
+                    <h3>📋 Deeds & Titles</h3>
+                    <ul class="document-list">
+                        <li><a href="#">Main Church Building Deed</a></li>
+                        <li><a href="#">Educational Building Deed</a></li>
+                        <li><a href="#">Parking Lot Title</a></li>
+                    </ul>
+                </div>
+
+                <div class="document-category">
+                    <h3>🔧 Maintenance Records</h3>
+                    <ul class="document-list">
+                        <li><a href="#">2024 HVAC Maintenance Log</a></li>
+                        <li><a href="#">Roof Inspection Reports</a></li>
+                        <li><a href="#">Equipment Service Records</a></li>
+                    </ul>
+                </div>
+
+                <div class="document-category">
+                    <h3>💰 Financial Documents</h3>
+                    <ul class="document-list">
+                        <li><a href="#">Property Insurance Policies</a></li>
+                        <li><a href="#">Maintenance Budget Reports</a></li>
+                        <li><a href="#">Capital Improvement Plans</a></li>
+                    </ul>
+                </div>
+
+                <div class="document-category">
+                    <h3>📸 Property Photos</h3>
+                    <ul class="document-list">
+                        <li><a href="#">2024 Property Inspection Photos</a></li>
+                        <li><a href="#">Before/After Improvements</a></li>
+                        <li><a href="#">Exterior Condition Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section">
+        <div class="container">
+            <h2>Property Management Contact</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <h3>🏛️ Facility Manager</h3>
+                        <p>John Smith</p>
+                        <p>Phone: (803) 555-0100</p>
+                        <p>Email: facility@friendshipbaptist.org</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>🔧 Maintenance Coordinator</h3>
+                        <p>Mary Johnson</p>
+                        <p>Phone: (803) 555-0101</p>
+                        <p>Email: maintenance@friendshipbaptist.org</p>
+                    </div>
+                    <div class="contact-item">
+                        <h3>📞 Emergency Contact</h3>
+                        <p>24/7 Facilities Emergency Line</p>
+                        <p>Phone: (803) 555-0102</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Friendship Baptist Church Property Management. All rights reserved.</p>
+            <p><a href="../index.html">Back to Church Website</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
