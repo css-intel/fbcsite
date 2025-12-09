@@ -7,6 +7,47 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Role Selection Modal (First Time) -->
+    <div id="roleModal" class="modal">
+        <div class="modal-content">
+            <h2>Welcome to Property Management System</h2>
+            <p>Select your role to continue:</p>
+            <div class="role-grid">
+                <button class="role-btn" data-role="owner">
+                    <span class="role-icon">👑</span>
+                    <span class="role-name">Property Owner</span>
+                    <span class="role-desc">Full access & reports</span>
+                </button>
+                <button class="role-btn" data-role="manager">
+                    <span class="role-icon">📋</span>
+                    <span class="role-name">Property Manager</span>
+                    <span class="role-desc">Oversight & coordination</span>
+                </button>
+                <button class="role-btn" data-role="supervisor">
+                    <span class="role-icon">👨‍💼</span>
+                    <span class="role-name">Maintenance Supervisor</span>
+                    <span class="role-desc">Maintenance oversight</span>
+                </button>
+                <button class="role-btn" data-role="tech">
+                    <span class="role-icon">🔧</span>
+                    <span class="role-name">Maintenance Tech</span>
+                    <span class="role-desc">Work orders & tasks</span>
+                </button>
+                <button class="role-btn" data-role="tenant">
+                    <span class="role-icon">🏠</span>
+                    <span class="role-name">Tenant</span>
+                    <span class="role-desc">Requests & info</span>
+                </button>
+                <button class="role-btn" data-role="vendor">
+                    <span class="role-icon">🚚</span>
+                    <span class="role-name">Vendor/Contractor</span>
+                    <span class="role-desc">Job coordination</span>
+                </button>
+            </div>
+            <button class="role-btn-close" onclick="skipRole()">View as Guest</button>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -27,6 +68,18 @@
                 <li><a href="#properties" class="nav-link">Properties</a></li>
                 <li><a href="#maintenance" class="nav-link">Maintenance</a></li>
                 <li><a href="#documents" class="nav-link">Documents</a></li>
+                <li class="role-indicator">
+                    <button id="roleBtn" class="role-badge">Guest View</button>
+                    <div id="roleMenu" class="role-menu hidden">
+                        <button class="role-option" data-role="owner">👑 Property Owner</button>
+                        <button class="role-option" data-role="manager">📋 Property Manager</button>
+                        <button class="role-option" data-role="supervisor">👨‍💼 Maintenance Supervisor</button>
+                        <button class="role-option" data-role="tech">🔧 Maintenance Tech</button>
+                        <button class="role-option" data-role="tenant">🏠 Tenant</button>
+                        <button class="role-option" data-role="vendor">🚚 Vendor/Contractor</button>
+                        <button class="role-option" data-role="">Guest View</button>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -36,6 +89,7 @@
         <div class="hero-content">
             <h1>Property Management System</h1>
             <p>Efficiently manage church properties and facilities</p>
+            <p id="roleDisplay" class="role-display"></p>
         </div>
     </section>
 
@@ -43,33 +97,279 @@
     <section id="dashboard" class="dashboard section">
         <div class="container">
             <h2>Dashboard Overview</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon">🏛️</div>
-                    <div class="stat-content">
-                        <h3>3</h3>
-                        <p>Properties</p>
+            
+            <!-- Owner Dashboard -->
+            <div id="owner-dashboard" class="role-content hidden">
+                <div class="dashboard-warning">
+                    <p>👑 <strong>Property Owner View</strong> - Full access to all metrics and reports</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card stat-card-lg">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <h3>$45,230</h3>
+                            <p>Annual Maintenance Budget</p>
+                            <small>Used: $32,150 (71%)</small>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-lg">
+                        <div class="stat-icon">🏛️</div>
+                        <div class="stat-content">
+                            <h3>3</h3>
+                            <p>Properties</p>
+                            <small>All Excellent Condition</small>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-lg">
+                        <div class="stat-icon">🔧</div>
+                        <div class="stat-content">
+                            <h3>8</h3>
+                            <p>Work Orders</p>
+                            <small>2 Active, 6 Completed</small>
+                        </div>
+                    </div>
+                    <div class="stat-card stat-card-lg">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <h3>94%</h3>
+                            <p>Preventative Maintenance</p>
+                            <small>vs. Reactive Repairs</small>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">🔧</div>
-                    <div class="stat-content">
-                        <h3>5</h3>
-                        <p>Maintenance Items</p>
+                <div class="owner-reports">
+                    <h3>Financial Reports</h3>
+                    <button class="btn btn-primary">Download Annual Report</button>
+                    <button class="btn btn-secondary">ROI Analysis</button>
+                    <button class="btn btn-secondary">Budget Forecast</button>
+                </div>
+            </div>
+
+            <!-- Manager Dashboard -->
+            <div id="manager-dashboard" class="role-content hidden">
+                <div class="dashboard-warning">
+                    <p>📋 <strong>Property Manager View</strong> - Coordination & oversight</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <h3>12</h3>
+                            <p>Upcoming Tasks</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚠️</div>
+                        <div class="stat-content">
+                            <h3>2</h3>
+                            <p>Urgent Issues</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3>5</h3>
+                            <p>Staff Members</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <h3>94%</h3>
+                            <p>Completion Rate</p>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">📄</div>
-                    <div class="stat-content">
-                        <h3>12</h3>
-                        <p>Documents</p>
+                <div class="manager-actions">
+                    <h3>Quick Actions</h3>
+                    <button class="btn btn-primary">Create Work Order</button>
+                    <button class="btn btn-secondary">Schedule Inspection</button>
+                    <button class="btn btn-secondary">Send Notifications</button>
+                </div>
+            </div>
+
+            <!-- Supervisor Dashboard -->
+            <div id="supervisor-dashboard" class="role-content hidden">
+                <div class="dashboard-warning">
+                    <p>👨‍💼 <strong>Maintenance Supervisor View</strong> - Team oversight</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3>3</h3>
+                            <p>Technicians on Duty</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔨</div>
+                        <div class="stat-content">
+                            <h3>7</h3>
+                            <p>Active Work Orders</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-content">
+                            <h3>2.5 hrs</h3>
+                            <p>Avg. Response Time</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <h3>4.8/5</h3>
+                            <p>Team Rating</p>
+                        </div>
                     </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon">👥</div>
-                    <div class="stat-content">
-                        <h3>8</h3>
-                        <p>Staff Members</p>
+                <div class="supervisor-actions">
+                    <h3>Supervision Tools</h3>
+                    <button class="btn btn-primary">Assign Work Orders</button>
+                    <button class="btn btn-secondary">View Team Schedule</button>
+                    <button class="btn btn-secondary">Performance Reports</button>
+                </div>
+            </div>
+
+            <!-- Tech Dashboard -->
+            <div id="tech-dashboard" class="role-content hidden">
+                <div class="dashboard-warning">
+                    <p>🔧 <strong>Maintenance Technician View</strong> - Your assignments</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-content">
+                            <h3>3</h3>
+                            <p>My Work Orders Today</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <h3>2</h3>
+                            <p>Completed Today</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏰</div>
+                        <div class="stat-content">
+                            <h3>45 min</h3>
+                            <p>Next Assignment</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📍</div>
+                        <div class="stat-content">
+                            <h3>Main Building</h3>
+                            <p>Current Location</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-actions">
+                    <h3>Quick Actions</h3>
+                    <button class="btn btn-primary">Start Work Order</button>
+                    <button class="btn btn-secondary">Report Issue</button>
+                    <button class="btn btn-secondary">Clock In/Out</button>
+                </div>
+            </div>
+
+            <!-- Tenant Dashboard -->
+            <div id="tenant-dashboard" class="role-content hidden">
+                <div class="dashboard-warning">
+                    <p>🏠 <strong>Tenant View</strong> - Submit requests & view info</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🎫</div>
+                        <div class="stat-content">
+                            <h3>2</h3>
+                            <p>Open Requests</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <h3>12</h3>
+                            <p>Completed Requests</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-content">
+                            <h3>2 days</h3>
+                            <p>Avg. Response Time</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tenant-actions">
+                    <h3>Submit Requests</h3>
+                    <button class="btn btn-primary">New Maintenance Request</button>
+                    <button class="btn btn-secondary">View My Requests</button>
+                </div>
+            </div>
+
+            <!-- Vendor Dashboard -->
+            <div id="vendor-dashboard" class="role-content hidden">
+                <div class="dashboard-warning">
+                    <p>🚚 <strong>Vendor/Contractor View</strong> - Active jobs</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <div class="stat-content">
+                            <h3>1</h3>
+                            <p>Active Jobs</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-content">
+                            <h3>5</h3>
+                            <p>Completed Projects</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <h3>4.9/5</h3>
+                            <p>Average Rating</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="vendor-actions">
+                    <h3>Job Coordination</h3>
+                    <button class="btn btn-primary">View My Jobs</button>
+                    <button class="btn btn-secondary">Submit Invoice</button>
+                </div>
+            </div>
+
+            <!-- Guest Dashboard -->
+            <div id="guest-dashboard" class="role-content">
+                <div class="dashboard-warning">
+                    <p>👤 <strong>Guest View</strong> - Basic information only</p>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">🏛️</div>
+                        <div class="stat-content">
+                            <h3>3</h3>
+                            <p>Properties</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-content">
+                            <h3>12</h3>
+                            <p>Documents</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-content">
+                            <h3>8</h3>
+                            <p>Staff Members</p>
+                        </div>
                     </div>
                 </div>
             </div>

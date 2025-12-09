@@ -1,3 +1,135 @@
+// Role Management System
+const roles = {
+    owner: { name: '👑 Property Owner', desc: 'Full access to all features and financial reports' },
+    manager: { name: '📋 Property Manager', desc: 'Coordination and oversight of all operations' },
+    supervisor: { name: '👨‍💼 Maintenance Supervisor', desc: 'Team oversight and work order management' },
+    tech: { name: '🔧 Maintenance Technician', desc: 'Work assignments and task completion' },
+    tenant: { name: '🏠 Tenant', desc: 'Submit requests and view property information' },
+    vendor: { name: '🚚 Vendor/Contractor', desc: 'Active job coordination and invoicing' }
+};
+
+// Set current role
+let currentRole = localStorage.getItem('propertyRole') || '';
+
+// Initialize Role Selection
+const roleModal = document.getElementById('roleModal');
+const roleButtons = document.querySelectorAll('.role-btn');
+
+roleButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const role = e.currentTarget.getAttribute('data-target-role') || e.currentTarget.getAttribute('data-role');
+        setRole(role);
+        roleModal.classList.add('hidden');
+    });
+});
+
+function setRole(role) {
+    currentRole = role;
+    localStorage.setItem('propertyRole', role);
+    updateDashboard();
+    updateRoleDisplay();
+    updateRoleMenu();
+    updateAccessibility();
+}
+
+function skipRole() {
+    currentRole = '';
+    localStorage.setItem('propertyRole', '');
+    roleModal.classList.add('hidden');
+    updateDashboard();
+    updateRoleDisplay();
+    updateRoleMenu();
+    updateAccessibility();
+}
+
+// Show modal if no role selected and on first visit
+if (!currentRole && !sessionStorage.getItem('roleModalShown')) {
+    roleModal.classList.remove('hidden');
+    sessionStorage.setItem('roleModalShown', 'true');
+} else if (currentRole) {
+    roleModal.classList.add('hidden');
+}
+
+// Update Dashboard Based on Role
+function updateDashboard() {
+    // Hide all dashboards
+    document.querySelectorAll('.role-content').forEach(el => {
+        el.classList.remove('active');
+    });
+
+    // Show selected dashboard
+    if (currentRole) {
+        const dashboard = document.getElementById(`${currentRole}-dashboard`);
+        if (dashboard) {
+            dashboard.classList.add('active');
+        }
+    } else {
+        document.getElementById('guest-dashboard').classList.add('active');
+    }
+}
+
+// Update Role Display
+function updateRoleDisplay() {
+    const roleDisplay = document.getElementById('roleDisplay');
+    if (currentRole && roles[currentRole]) {
+        roleDisplay.textContent = `${roles[currentRole].name} - ${roles[currentRole].desc}`;
+    } else {
+        roleDisplay.textContent = 'Viewing as Guest - Limited information available';
+    }
+}
+
+// Update Role Menu
+function updateRoleMenu() {
+    const roleBtn = document.getElementById('roleBtn');
+    if (currentRole && roles[currentRole]) {
+        roleBtn.textContent = roles[currentRole].name;
+    } else {
+        roleBtn.textContent = 'Guest View';
+    }
+}
+
+// Update Accessibility Based on Role
+function updateAccessibility() {
+    const restrictedElements = document.querySelectorAll('[data-role-required]');
+    
+    restrictedElements.forEach(el => {
+        const requiredRole = el.getAttribute('data-role-required');
+        if (requiredRole && !currentRole.includes(requiredRole)) {
+            el.style.display = 'none';
+        } else {
+            el.style.display = '';
+        }
+    });
+}
+
+// Role Menu Toggle
+const roleBtn = document.getElementById('roleBtn');
+const roleMenu = document.getElementById('roleMenu');
+
+if (roleBtn) {
+    roleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        roleMenu.classList.toggle('hidden');
+    });
+}
+
+// Role Menu Options
+const roleOptions = document.querySelectorAll('.role-option');
+roleOptions.forEach(option => {
+    option.addEventListener('click', (e) => {
+        const role = e.target.getAttribute('data-role');
+        setRole(role);
+        roleMenu.classList.add('hidden');
+    });
+});
+
+// Close role menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.role-indicator')) {
+        roleMenu.classList.add('hidden');
+    }
+});
+
 // Mobile Menu Toggle
 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 const navMenu = document.getElementById('navMenu');
@@ -51,7 +183,10 @@ tabButtons.forEach(button => {
         // Add active class to clicked button and corresponding content
         button.classList.add('active');
         const tabName = button.getAttribute('data-tab');
-        document.getElementById(tabName).classList.add('active');
+        const contentEl = document.getElementById(tabName);
+        if (contentEl) {
+            contentEl.classList.add('active');
+        }
     });
 });
 
@@ -117,4 +252,12 @@ window.addEventListener('scroll', () => {
     }
 });
 
-console.log('Property Management System loaded successfully!');
+// Initialize on page load
+window.addEventListener('load', () => {
+    updateDashboard();
+    updateRoleDisplay();
+    updateRoleMenu();
+    updateAccessibility();
+});
+
+console.log('Property Management System with Role-Based Access loaded successfully!');
