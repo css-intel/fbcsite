@@ -13,34 +13,19 @@
             <h2>Welcome to Property Management System</h2>
             <p>Select your role to continue:</p>
             <div class="role-grid">
-                <button class="role-btn" data-role="owner">
-                    <span class="role-icon">👑</span>
-                    <span class="role-name">Property Owner</span>
-                    <span class="role-desc">Full access & reports</span>
-                </button>
                 <button class="role-btn" data-role="manager">
                     <span class="role-icon">📋</span>
                     <span class="role-name">Property Manager</span>
                     <span class="role-desc">Oversight & coordination</span>
-                </button>
-                <button class="role-btn" data-role="supervisor">
-                    <span class="role-icon">👨‍💼</span>
-                    <span class="role-name">Maintenance Supervisor</span>
-                    <span class="role-desc">Maintenance oversight</span>
-                </button>
-                <button class="role-btn" data-role="tech">
-                    <span class="role-icon">🔧</span>
-                    <span class="role-name">Maintenance Tech</span>
-                    <span class="role-desc">Work orders & tasks</span>
                 </button>
                 <button class="role-btn" data-role="tenant">
                     <span class="role-icon">🏠</span>
                     <span class="role-name">Tenant</span>
                     <span class="role-desc">Requests & info</span>
                 </button>
-                <button class="role-btn" data-role="vendor">
-                    <span class="role-icon">🚚</span>
-                    <span class="role-name">Vendor/Contractor</span>
+                <button class="role-btn" data-role="subcontractor">
+                    <span class="role-icon">🔧</span>
+                    <span class="role-name">Subcontractor</span>
                     <span class="role-desc">Job coordination</span>
                 </button>
             </div>
@@ -71,12 +56,9 @@
                 <li class="role-indicator">
                     <button id="roleBtn" class="role-badge">Guest View</button>
                     <div id="roleMenu" class="role-menu hidden">
-                        <button class="role-option" data-role="owner">👑 Property Owner</button>
                         <button class="role-option" data-role="manager">📋 Property Manager</button>
-                        <button class="role-option" data-role="supervisor">👨‍💼 Maintenance Supervisor</button>
-                        <button class="role-option" data-role="tech">🔧 Maintenance Tech</button>
                         <button class="role-option" data-role="tenant">🏠 Tenant</button>
-                        <button class="role-option" data-role="vendor">🚚 Vendor/Contractor</button>
+                        <button class="role-option" data-role="subcontractor">🔧 Subcontractor</button>
                         <button class="role-option" data-role="">Guest View</button>
                     </div>
                 </li>
@@ -98,53 +80,6 @@
         <div class="container">
             <h2>Dashboard Overview</h2>
             
-            <!-- Owner Dashboard -->
-            <div id="owner-dashboard" class="role-content hidden">
-                <div class="dashboard-warning">
-                    <p>👑 <strong>Property Owner View</strong> - Full access to all metrics and reports</p>
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-card stat-card-lg">
-                        <div class="stat-icon">💰</div>
-                        <div class="stat-content">
-                            <h3>$45,230</h3>
-                            <p>Annual Maintenance Budget</p>
-                            <small>Used: $32,150 (71%)</small>
-                        </div>
-                    </div>
-                    <div class="stat-card stat-card-lg">
-                        <div class="stat-icon">🏛️</div>
-                        <div class="stat-content">
-                            <h3>3</h3>
-                            <p>Properties</p>
-                            <small>All Excellent Condition</small>
-                        </div>
-                    </div>
-                    <div class="stat-card stat-card-lg">
-                        <div class="stat-icon">🔧</div>
-                        <div class="stat-content">
-                            <h3>8</h3>
-                            <p>Work Orders</p>
-                            <small>2 Active, 6 Completed</small>
-                        </div>
-                    </div>
-                    <div class="stat-card stat-card-lg">
-                        <div class="stat-icon">📊</div>
-                        <div class="stat-content">
-                            <h3>94%</h3>
-                            <p>Preventative Maintenance</p>
-                            <small>vs. Reactive Repairs</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="owner-reports">
-                    <h3>Financial Reports</h3>
-                    <button class="btn btn-primary">Download Annual Report</button>
-                    <button class="btn btn-secondary">ROI Analysis</button>
-                    <button class="btn btn-secondary">Budget Forecast</button>
-                </div>
-            </div>
-
             <!-- Manager Dashboard -->
             <div id="manager-dashboard" class="role-content hidden">
                 <div class="dashboard-warning">
@@ -169,7 +104,7 @@
                         <div class="stat-icon">👥</div>
                         <div class="stat-content">
                             <h3>5</h3>
-                            <p>Staff Members</p>
+                            <p>Subcontractors</p>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -180,97 +115,99 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- NEW WORK ORDER FORM -->
+                <div class="work-order-section">
+                    <h3>📝 Create New Work Order</h3>
+                    <form id="newWorkOrderForm" class="work-order-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="workOrderProperty">Property *</label>
+                                <select id="workOrderProperty" required>
+                                    <option value="">Select Property</option>
+                                    <option value="1103-hampton">1103 Hampton Avenue</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="workOrderUnit">Unit/Tenant *</label>
+                                <select id="workOrderUnit" required>
+                                    <option value="">Select Unit</option>
+                                    <option value="unit-a">Unit A</option>
+                                    <option value="unit-b">Unit B</option>
+                                    <option value="unit-c">Unit C</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="workOrderType">Request Type *</label>
+                                <select id="workOrderType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="maintenance">Maintenance</option>
+                                    <option value="repair">Repair</option>
+                                    <option value="move-out">Move Out</option>
+                                    <option value="move-in">Move In</option>
+                                    <option value="lease-update">Lease Update</option>
+                                    <option value="inspection">Inspection</option>
+                                    <option value="emergency">Emergency</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="workOrderPriority">Priority *</label>
+                                <select id="workOrderPriority" required>
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                    <option value="urgent">Urgent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="workOrderTitle">Title/Subject *</label>
+                            <input type="text" id="workOrderTitle" placeholder="Brief description of the issue" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="workOrderDescription">Description *</label>
+                            <textarea id="workOrderDescription" rows="4" placeholder="Detailed description of the request..." required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="workOrderAssign">Assign to Subcontractor</label>
+                                <select id="workOrderAssign">
+                                    <option value="">Unassigned</option>
+                                    <option value="plumber">Plumber</option>
+                                    <option value="electrician">Electrician</option>
+                                    <option value="hvac">HVAC Technician</option>
+                                    <option value="handyman">Handyman</option>
+                                    <option value="landscaping">Landscaping</option>
+                                    <option value="cleaning">Cleaning Service</option>
+                                    <option value="custom">Add Custom...</option>
+                                </select>
+                                <input type="text" id="customSubcontractor" placeholder="Enter custom subcontractor" class="hidden" style="margin-top: 8px;">
+                            </div>
+                            <div class="form-group">
+                                <label for="workOrderDue">Due Date</label>
+                                <input type="date" id="workOrderDue">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="workOrderContact">Tenant Contact Info</label>
+                            <input type="text" id="workOrderContact" placeholder="Phone or email for follow-up">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-lg">Create Work Order</button>
+                            <button type="reset" class="btn btn-secondary">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="manager-actions">
                     <h3>Quick Actions</h3>
-                    <button class="btn btn-primary">Create Work Order</button>
-                    <button class="btn btn-secondary">Schedule Inspection</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('newWorkOrderForm').scrollIntoView({behavior: 'smooth'})">+ New Work Order</button>
+                    <button class="btn btn-secondary">View All Work Orders</button>
+                    <button class="btn btn-secondary">Manage Tenants</button>
                     <button class="btn btn-secondary">Send Notifications</button>
-                </div>
-            </div>
-
-            <!-- Supervisor Dashboard -->
-            <div id="supervisor-dashboard" class="role-content hidden">
-                <div class="dashboard-warning">
-                    <p>👨‍💼 <strong>Maintenance Supervisor View</strong> - Team oversight</p>
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">👥</div>
-                        <div class="stat-content">
-                            <h3>3</h3>
-                            <p>Technicians on Duty</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🔨</div>
-                        <div class="stat-content">
-                            <h3>7</h3>
-                            <p>Active Work Orders</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⏱️</div>
-                        <div class="stat-content">
-                            <h3>2.5 hrs</h3>
-                            <p>Avg. Response Time</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⭐</div>
-                        <div class="stat-content">
-                            <h3>4.8/5</h3>
-                            <p>Team Rating</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="supervisor-actions">
-                    <h3>Supervision Tools</h3>
-                    <button class="btn btn-primary">Assign Work Orders</button>
-                    <button class="btn btn-secondary">View Team Schedule</button>
-                    <button class="btn btn-secondary">Performance Reports</button>
-                </div>
-            </div>
-
-            <!-- Tech Dashboard -->
-            <div id="tech-dashboard" class="role-content hidden">
-                <div class="dashboard-warning">
-                    <p>🔧 <strong>Maintenance Technician View</strong> - Your assignments</p>
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">📋</div>
-                        <div class="stat-content">
-                            <h3>3</h3>
-                            <p>My Work Orders Today</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">✅</div>
-                        <div class="stat-content">
-                            <h3>2</h3>
-                            <p>Completed Today</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⏰</div>
-                        <div class="stat-content">
-                            <h3>45 min</h3>
-                            <p>Next Assignment</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📍</div>
-                        <div class="stat-content">
-                            <h3>Main Building</h3>
-                            <p>Current Location</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="tech-actions">
-                    <h3>Quick Actions</h3>
-                    <button class="btn btn-primary">Start Work Order</button>
-                    <button class="btn btn-secondary">Report Issue</button>
-                    <button class="btn btn-secondary">Clock In/Out</button>
                 </div>
             </div>
 
@@ -301,18 +238,98 @@
                             <p>Avg. Response Time</p>
                         </div>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💳</div>
+                        <div class="stat-content">
+                            <h3>Payments</h3>
+                            <p>Make a Payment</p>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- TENANT REQUEST FORM -->
+                <div class="tenant-request-section">
+                    <h3>📋 Submit a Request</h3>
+                    <form id="tenantRequestForm" class="work-order-form">
+                        <div class="form-group">
+                            <label for="tenantRequestType">What do you need help with? *</label>
+                            <select id="tenantRequestType" required>
+                                <option value="">Select Request Type</option>
+                                <option value="maintenance">Maintenance Issue</option>
+                                <option value="repair">Something Needs Repair</option>
+                                <option value="lease">Lease Question</option>
+                                <option value="move-out">Move Out Request</option>
+                                <option value="payment">Payment Question</option>
+                                <option value="noise">Noise Complaint</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantRequestTitle">Brief Description *</label>
+                            <input type="text" id="tenantRequestTitle" placeholder="e.g., Leaky faucet in bathroom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantRequestDetails">Details *</label>
+                            <textarea id="tenantRequestDetails" rows="4" placeholder="Please describe the issue in detail..." required></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tenantBestContact">Best Way to Contact You</label>
+                                <select id="tenantBestContact">
+                                    <option value="phone">Phone Call</option>
+                                    <option value="text">Text Message</option>
+                                    <option value="email">Email</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="tenantContactInfo">Contact Info</label>
+                                <input type="text" id="tenantContactInfo" placeholder="Phone or email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenantUrgency">How urgent is this?</label>
+                            <select id="tenantUrgency">
+                                <option value="low">Not Urgent - When you can</option>
+                                <option value="medium" selected>Somewhat Urgent - This week</option>
+                                <option value="high">Very Urgent - ASAP</option>
+                                <option value="emergency">⚠️ EMERGENCY - Immediate help needed</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit Request</button>
+                            <button type="reset" class="btn btn-secondary">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- PAYMENT OPTIONS -->
+                <div class="payment-section">
+                    <h3>💳 Payment Options</h3>
+                    <div class="payment-options">
+                        <button class="btn btn-primary btn-lg payment-btn" onclick="showPaymentModal()">
+                            💵 Make a Rent Payment
+                        </button>
+                        <button class="btn btn-secondary payment-btn">
+                            📄 View Payment History
+                        </button>
+                        <button class="btn btn-secondary payment-btn">
+                            📅 Set Up Auto-Pay
+                        </button>
+                    </div>
+                </div>
+
                 <div class="tenant-actions">
-                    <h3>Submit Requests</h3>
-                    <button class="btn btn-primary">New Maintenance Request</button>
+                    <h3>Quick Actions</h3>
                     <button class="btn btn-secondary">View My Requests</button>
+                    <button class="btn btn-secondary">My Lease Info</button>
+                    <button class="btn btn-secondary">Contact Manager</button>
                 </div>
             </div>
 
-            <!-- Vendor Dashboard -->
-            <div id="vendor-dashboard" class="role-content hidden">
+            <!-- Subcontractor Dashboard -->
+            <div id="subcontractor-dashboard" class="role-content hidden">
                 <div class="dashboard-warning">
-                    <p>🚚 <strong>Vendor/Contractor View</strong> - Active jobs</p>
+                    <p>🔧 <strong>Subcontractor View</strong> - Active jobs & assignments</p>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -326,21 +343,30 @@
                         <div class="stat-icon">✅</div>
                         <div class="stat-content">
                             <h3>5</h3>
-                            <p>Completed Projects</p>
+                            <p>Completed Jobs</p>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">⭐</div>
                         <div class="stat-content">
                             <h3>4.9/5</h3>
-                            <p>Average Rating</p>
+                            <p>Rating</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <h3>$2,450</h3>
+                            <p>Pending Payment</p>
                         </div>
                     </div>
                 </div>
-                <div class="vendor-actions">
-                    <h3>Job Coordination</h3>
+                <div class="subcontractor-actions">
+                    <h3>Job Management</h3>
                     <button class="btn btn-primary">View My Jobs</button>
+                    <button class="btn btn-secondary">Update Job Status</button>
                     <button class="btn btn-secondary">Submit Invoice</button>
+                    <button class="btn btn-secondary">View Payments</button>
                 </div>
             </div>
 
@@ -379,89 +405,57 @@
     <!-- Properties Section -->
     <section id="properties" class="properties section">
         <div class="container">
-            <h2>Church Properties</h2>
+            <h2>Managed Properties</h2>
             <div class="properties-grid">
-                <!-- Property 1 -->
+                <!-- Property 1 - 1103 Hampton Avenue -->
                 <div class="property-card">
                     <div class="property-image">
-                        <img src="https://images.unsplash.com/photo-1577720621294-f3406b0865e7?w=400&h=300&fit=crop" alt="Main Church Building">
+                        <img src="https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=400&h=300&fit=crop" alt="1103 Hampton Avenue">
                     </div>
                     <div class="property-details">
-                        <h3>Main Church Building</h3>
-                        <p class="property-address">123 Church Street, Aiken, SC 29801</p>
+                        <h3>1103 Hampton Avenue</h3>
+                        <p class="property-address">1103 Hampton Avenue, Aiken, SC 29801</p>
                         <ul class="property-info">
-                            <li><strong>Year Built:</strong> 1952</li>
-                            <li><strong>Square Feet:</strong> 8,500</li>
-                            <li><strong>Capacity:</strong> 350 people</li>
+                            <li><strong>Units:</strong> 3</li>
+                            <li><strong>Occupancy:</strong> <span class="status-good">100%</span></li>
                             <li><strong>Status:</strong> <span class="status-good">Good Condition</span></li>
                         </ul>
                         <button class="btn btn-secondary" onclick="toggleDetails(this)">View Details</button>
                     </div>
                     <div class="property-expanded" style="display: none;">
-                        <h4>Property Details</h4>
-                        <p>The main church building houses the sanctuary, fellowship hall, and administrative offices. Regular maintenance is performed quarterly.</p>
-                        <h4>Recent Improvements</h4>
+                        <h4>Unit Information</h4>
+                        <div class="tenant-list">
+                            <div class="tenant-card">
+                                <h5>Unit A</h5>
+                                <p><strong>Tenant:</strong> <span class="tenant-name">Assigned</span></p>
+                                <p><strong>Lease:</strong> Active</p>
+                                <p><strong>Rent Status:</strong> <span class="status-good">Current</span></p>
+                            </div>
+                            <div class="tenant-card">
+                                <h5>Unit B</h5>
+                                <p><strong>Tenant:</strong> <span class="tenant-name">Assigned</span></p>
+                                <p><strong>Lease:</strong> Active</p>
+                                <p><strong>Rent Status:</strong> <span class="status-good">Current</span></p>
+                            </div>
+                            <div class="tenant-card">
+                                <h5>Unit C</h5>
+                                <p><strong>Tenant:</strong> <span class="tenant-name">Assigned</span></p>
+                                <p><strong>Lease:</strong> Active</p>
+                                <p><strong>Rent Status:</strong> <span class="status-good">Current</span></p>
+                            </div>
+                        </div>
+                        <h4>Recent Maintenance</h4>
                         <ul>
-                            <li>HVAC system upgrade (2022)</li>
-                            <li>Roof repairs (2021)</li>
-                            <li>Interior painting (2023)</li>
+                            <li>HVAC service - Unit A (Jan 2026)</li>
+                            <li>Plumbing repair - Unit B (Dec 2025)</li>
                         </ul>
                     </div>
                 </div>
+            </div>
 
-                <!-- Property 2 -->
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://images.unsplash.com/photo-1570129477492-45a003537e1f?w=400&h=300&fit=crop" alt="Educational Building">
-                    </div>
-                    <div class="property-details">
-                        <h3>Educational Building</h3>
-                        <p class="property-address">125 Church Street, Aiken, SC 29801</p>
-                        <ul class="property-info">
-                            <li><strong>Year Built:</strong> 1998</li>
-                            <li><strong>Square Feet:</strong> 5,200</li>
-                            <li><strong>Classrooms:</strong> 8</li>
-                            <li><strong>Status:</strong> <span class="status-good">Excellent Condition</span></li>
-                        </ul>
-                        <button class="btn btn-secondary" onclick="toggleDetails(this)">View Details</button>
-                    </div>
-                    <div class="property-expanded" style="display: none;">
-                        <h4>Property Details</h4>
-                        <p>Modern educational facility used for Sunday school classes, Bible studies, and community events.</p>
-                        <h4>Recent Improvements</h4>
-                        <ul>
-                            <li>Classroom technology upgrades (2023)</li>
-                            <li>WiFi system installation (2022)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Property 3 -->
-                <div class="property-card">
-                    <div class="property-image">
-                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop" alt="Parking Area">
-                    </div>
-                    <div class="property-details">
-                        <h3>Parking & Grounds</h3>
-                        <p class="property-address">123 Church Street, Aiken, SC 29801</p>
-                        <ul class="property-info">
-                            <li><strong>Parking Spaces:</strong> 125</li>
-                            <li><strong>Lot Size:</strong> 2.5 acres</li>
-                            <li><strong>Landscaping:</strong> Professional</li>
-                            <li><strong>Status:</strong> <span class="status-good">Well Maintained</span></li>
-                        </ul>
-                        <button class="btn btn-secondary" onclick="toggleDetails(this)">View Details</button>
-                    </div>
-                    <div class="property-expanded" style="display: none;">
-                        <h4>Property Details</h4>
-                        <p>Large parking lot with landscaped grounds. Regular maintenance includes asphalt sealing, line striping, and lawn care.</p>
-                        <h4>Recent Improvements</h4>
-                        <ul>
-                            <li>Parking lot seal coating (2023)</li>
-                            <li>LED lighting installation (2022)</li>
-                        </ul>
-                    </div>
-                </div>
+            <!-- Add Property Button (Property Manager Only) -->
+            <div class="add-property-section" data-role-required="manager">
+                <button class="btn btn-primary" onclick="showAddPropertyModal()">+ Add New Property</button>
             </div>
         </div>
     </section>
@@ -616,20 +610,14 @@
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-item">
-                        <h3>🏛️ Facility Manager</h3>
-                        <p>John Smith</p>
+                        <h3>🏛️ Property Manager</h3>
+                        <p>Contact the property manager</p>
                         <p>Phone: (803) 555-0100</p>
-                        <p>Email: facility@friendshipbaptist.org</p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>🔧 Maintenance Coordinator</h3>
-                        <p>Mary Johnson</p>
-                        <p>Phone: (803) 555-0101</p>
-                        <p>Email: maintenance@friendshipbaptist.org</p>
+                        <p>Email: property@friendshipbaptist.org</p>
                     </div>
                     <div class="contact-item">
                         <h3>📞 Emergency Contact</h3>
-                        <p>24/7 Facilities Emergency Line</p>
+                        <p>24/7 Emergency Line</p>
                         <p>Phone: (803) 555-0102</p>
                     </div>
                 </div>
@@ -637,10 +625,75 @@
         </div>
     </section>
 
+    <!-- Chat Widget -->
+    <div id="chatWidget" class="chat-widget">
+        <button id="chatToggle" class="chat-toggle" onclick="toggleChat()">
+            <span class="chat-icon">💬</span>
+            <span class="chat-notification" id="chatNotification">1</span>
+        </button>
+        <div id="chatWindow" class="chat-window hidden">
+            <div class="chat-header">
+                <h4>💬 Message Property Manager</h4>
+                <button class="chat-close" onclick="toggleChat()">×</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message incoming">
+                    <p>Hello! How can I help you today? You can send a message here and we'll respond as soon as possible.</p>
+                    <span class="chat-time">Property Management</span>
+                </div>
+            </div>
+            <form class="chat-input-form" onsubmit="sendChatMessage(event)">
+                <input type="text" id="chatInput" placeholder="Type your message..." autocomplete="off">
+                <button type="submit" class="chat-send">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>💳 Make a Payment</h2>
+            <button class="modal-close" onclick="closePaymentModal()">×</button>
+            <form id="paymentForm" class="payment-form">
+                <div class="form-group">
+                    <label for="paymentAmount">Payment Amount *</label>
+                    <input type="number" id="paymentAmount" placeholder="0.00" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="paymentType">Payment For</label>
+                    <select id="paymentType">
+                        <option value="rent">Monthly Rent</option>
+                        <option value="late-fee">Late Fee</option>
+                        <option value="deposit">Security Deposit</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="payment-methods">
+                    <h4>Select Payment Method</h4>
+                    <div class="payment-method-options">
+                        <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('card')">
+                            💳 Credit/Debit Card
+                        </button>
+                        <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('bank')">
+                            🏦 Bank Transfer
+                        </button>
+                        <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('cash')">
+                            💵 Pay in Person
+                        </button>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-lg">Process Payment</button>
+                    <button type="button" class="btn btn-secondary" onclick="closePaymentModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Friendship Baptist Church Property Management. All rights reserved.</p>
+            <p>&copy; 2026 Friendship Baptist Church Property Management. All rights reserved.</p>
             <p><a href="../index.html">Back to Church Website</a></p>
         </div>
     </footer>

@@ -1,11 +1,8 @@
 // Role Management System
 const roles = {
-    owner: { name: '👑 Property Owner', desc: 'Full access to all features and financial reports' },
     manager: { name: '📋 Property Manager', desc: 'Coordination and oversight of all operations' },
-    supervisor: { name: '👨‍💼 Maintenance Supervisor', desc: 'Team oversight and work order management' },
-    tech: { name: '🔧 Maintenance Technician', desc: 'Work assignments and task completion' },
     tenant: { name: '🏠 Tenant', desc: 'Submit requests and view property information' },
-    vendor: { name: '🚚 Vendor/Contractor', desc: 'Active job coordination and invoicing' }
+    subcontractor: { name: '🔧 Subcontractor', desc: 'Active job coordination and invoicing' }
 };
 
 // Set current role
@@ -94,7 +91,7 @@ function updateAccessibility() {
     
     restrictedElements.forEach(el => {
         const requiredRole = el.getAttribute('data-role-required');
-        if (requiredRole && !currentRole.includes(requiredRole)) {
+        if (requiredRole && currentRole !== requiredRole) {
             el.style.display = 'none';
         } else {
             el.style.display = '';
@@ -201,63 +198,225 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Initialize animations on scroll
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// ==========================================
+// WORK ORDER FORM HANDLING
+// ==========================================
 
-const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+// Custom Subcontractor Field Toggle
+const workOrderAssign = document.getElementById('workOrderAssign');
+const customSubcontractor = document.getElementById('customSubcontractor');
+
+if (workOrderAssign) {
+    workOrderAssign.addEventListener('change', function() {
+        if (this.value === 'custom') {
+            customSubcontractor.classList.remove('hidden');
+            customSubcontractor.focus();
+        } else {
+            customSubcontractor.classList.add('hidden');
+            customSubcontractor.value = '';
         }
     });
-}, observerOptions);
+}
 
-// Observe all cards for animation
-const cards = document.querySelectorAll('.property-card, .stat-card, .maintenance-item, .document-category');
-cards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
+// Work Order Form Submission
+const newWorkOrderForm = document.getElementById('newWorkOrderForm');
+if (newWorkOrderForm) {
+    newWorkOrderForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const workOrder = {
+            property: document.getElementById('workOrderProperty').value,
+            unit: document.getElementById('workOrderUnit').value,
+            type: document.getElementById('workOrderType').value,
+            priority: document.getElementById('workOrderPriority').value,
+            title: document.getElementById('workOrderTitle').value,
+            description: document.getElementById('workOrderDescription').value,
+            assignedTo: workOrderAssign.value === 'custom' ? customSubcontractor.value : workOrderAssign.value,
+            dueDate: document.getElementById('workOrderDue').value,
+            contact: document.getElementById('workOrderContact').value,
+            createdAt: new Date().toISOString(),
+            status: 'pending'
+        };
+        
+        // Save to localStorage (in real app, would send to server)
+        let workOrders = JSON.parse(localStorage.getItem('workOrders') || '[]');
+        workOrders.push(workOrder);
+        localStorage.setItem('workOrders', JSON.stringify(workOrders));
+        
+        // Show success message
+        alert('✅ Work Order Created Successfully!\n\nTitle: ' + workOrder.title + '\nProperty: ' + workOrder.property + '\nPriority: ' + workOrder.priority);
+        
+        // Reset form
+        newWorkOrderForm.reset();
+        customSubcontractor.classList.add('hidden');
+    });
+}
+
+// ==========================================
+// TENANT REQUEST FORM HANDLING
+// ==========================================
+
+const tenantRequestForm = document.getElementById('tenantRequestForm');
+if (tenantRequestForm) {
+    tenantRequestForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const request = {
+            type: document.getElementById('tenantRequestType').value,
+            title: document.getElementById('tenantRequestTitle').value,
+            details: document.getElementById('tenantRequestDetails').value,
+            contactMethod: document.getElementById('tenantBestContact').value,
+            contactInfo: document.getElementById('tenantContactInfo').value,
+            urgency: document.getElementById('tenantUrgency').value,
+            createdAt: new Date().toISOString(),
+            status: 'pending'
+        };
+        
+        // Save to localStorage
+        let requests = JSON.parse(localStorage.getItem('tenantRequests') || '[]');
+        requests.push(request);
+        localStorage.setItem('tenantRequests', JSON.stringify(requests));
+        
+        // Show success message
+        alert('✅ Request Submitted Successfully!\n\nWe will get back to you as soon as possible.\n\nYour request: ' + request.title);
+        
+        // Reset form
+        tenantRequestForm.reset();
+    });
+}
+
+// ==========================================
+// CHAT FUNCTIONALITY
+// ==========================================
+
+function toggleChat() {
+    const chatWindow = document.getElementById('chatWindow');
+    const chatNotification = document.getElementById('chatNotification');
+    
+    chatWindow.classList.toggle('hidden');
+    
+    // Hide notification when opened
+    if (!chatWindow.classList.contains('hidden')) {
+        chatNotification.style.display = 'none';
+    }
+}
+
+function sendChatMessage(e) {
+    e.preventDefault();
+    
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+    const message = chatInput.value.trim();
+    
+    if (!message) return;
+    
+    // Add user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message outgoing';
+    userMsg.innerHTML = `
+        <p>${message}</p>
+        <span class="chat-time">You • Just now</span>
+    `;
+    chatMessages.appendChild(userMsg);
+    
+    // Save to localStorage
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
+    chatHistory.push({
+        type: 'outgoing',
+        message: message,
+        timestamp: new Date().toISOString()
+    });
+    localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+    
+    // Clear input
+    chatInput.value = '';
+    
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    // Auto-reply simulation
+    setTimeout(() => {
+        const autoReply = document.createElement('div');
+        autoReply.className = 'chat-message incoming';
+        autoReply.innerHTML = `
+            <p>Thank you for your message! A property manager will respond to you shortly during business hours (Mon-Fri, 9 AM - 5 PM).</p>
+            <span class="chat-time">Property Management • Just now</span>
+        `;
+        chatMessages.appendChild(autoReply);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+}
+
+// ==========================================
+// PAYMENT FUNCTIONALITY
+// ==========================================
+
+function showPaymentModal() {
+    document.getElementById('paymentModal').classList.remove('hidden');
+}
+
+function closePaymentModal() {
+    document.getElementById('paymentModal').classList.add('hidden');
+}
+
+function selectPaymentMethod(method) {
+    // Highlight selected method
+    document.querySelectorAll('.payment-method-btn').forEach(btn => {
+        btn.classList.remove('selected');
+    });
+    event.target.classList.add('selected');
+    
+    // Store selection
+    document.getElementById('paymentForm').dataset.method = method;
+}
+
+// Payment Form Submission
+const paymentForm = document.getElementById('paymentForm');
+if (paymentForm) {
+    paymentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const amount = document.getElementById('paymentAmount').value;
+        const type = document.getElementById('paymentType').value;
+        const method = this.dataset.method || 'card';
+        
+        if (!amount || amount <= 0) {
+            alert('Please enter a valid payment amount.');
+            return;
+        }
+        
+        // Simulate payment processing
+        alert(`💳 Payment Processing...\n\nAmount: $${parseFloat(amount).toFixed(2)}\nType: ${type}\nMethod: ${method}\n\nIn a real implementation, this would connect to a payment processor.`);
+        
+        closePaymentModal();
+        paymentForm.reset();
+    });
+}
+
+// Close modals when clicking outside
+document.addEventListener('click', function(e) {
+    const paymentModal = document.getElementById('paymentModal');
+    if (e.target === paymentModal) {
+        closePaymentModal();
+    }
 });
 
-// Add hamburger animation styles
-const style = document.createElement('style');
-style.textContent = `
-    .mobile-menu-btn span.active:nth-child(1) {
-        transform: rotate(45deg) translate(10px, 10px);
-    }
-    
-    .mobile-menu-btn span.active:nth-child(2) {
-        opacity: 0;
-    }
-    
-    .mobile-menu-btn span.active:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -7px);
-    }
-`;
-document.head.appendChild(style);
+// ==========================================
+// ADD PROPERTY MODAL
+// ==========================================
 
-// Add scroll animations
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.15)';
-    } else {
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    }
-});
+function showAddPropertyModal() {
+    alert('Add Property functionality would open a form to add new rental properties.\n\nThis feature will be connected to a backend database in the full implementation.');
+}
 
-// Initialize on page load
-window.addEventListener('load', () => {
+// ==========================================
+// INITIALIZE ON PAGE LOAD
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', function() {
     updateDashboard();
     updateRoleDisplay();
     updateRoleMenu();
     updateAccessibility();
 });
 
-console.log('Property Management System with Role-Based Access loaded successfully!');
