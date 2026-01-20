@@ -1,8 +1,11 @@
 {
   "sunday_morning": {
     "sunday_school": "9:00 AM",
-    "worship": "10:30 AM"
+    "worship": "10:15 AM"
   },
-  "sunday_evening": "6:00 PM",
-  "wednesday": "7:00 PM"
+  "wednesday": {
+    "bible_study_morning": "11:45 AM",
+    "prayer_service": "5:45 PM",
+    "bible_study_evening": "6:15 PM"
+  }
 }
